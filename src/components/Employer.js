@@ -102,3 +102,5 @@ class Employer extends Component {
         )
     }
 }
+
+export default Employer
