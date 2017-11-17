@@ -9,7 +9,7 @@ class Common extends Component {
 
     componentDidMount() {
         const {payroll, web3, account } = this.props;
-        payroll.getInfo.call({
+        payroll.checkInfo.call({
             from: account,
         }).then((result) => {
             this.setState({

@@ -79,7 +79,7 @@ class App extends Component {
   render() {
     const {selectedAccount, accounts, payroll, web3} = this.state;
 
-    if (!acocunts) {
+    if (!accounts) {
       return <div>Loading</div>;
     }
 
@@ -92,15 +92,15 @@ class App extends Component {
         <main className="container">
           <div className="pure-g">
             <div className="pure-u-1-3">
-              <Accounts accounts={accounts} onSelectAccount={this.onSelectAccount}>
+              <Accounts accounts={accounts} onSelectAccount={this.onSelectAccount}/>
             </div>
             <div className="pure-u-2-3">
               {
                 selectedAccount === accounts[0] ?
-                <Employer employer={selectedAccount} payroll={payroll} web3={web3}> :
-                <Employee employee={selectedAccount} payroll={payroll} web3={web3}>
+                <Employer employer={selectedAccount} payroll={payroll} web3={web3} /> :
+                <Employee employee={selectedAccount} payroll={payroll} web3={web3} />
               }
-              {payroll && <Common account={selectedAccount} payroll={payroll} web3={web3}>}
+              {payroll && <Common account={selectedAccount} payroll={payroll} web3={web3} />}
             </div>
           </div>
         </main>

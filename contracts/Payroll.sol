@@ -107,7 +107,7 @@ contract Payroll is Ownable {
 
     function checkInfo() returns(uint balance, uint runway, uint employeeCount) {
         balance = this.balance;
-        runway = calculateRunway();
+        runway = totalSalary > 0 ? calculateRunway() : 0;
         employeeCount = totalEmployee;
     }
 }

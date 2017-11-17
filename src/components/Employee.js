@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Employee extends Component {
     constructor(props) {
         super(props);
-        this.state= = {};
+        this.state = {};
     }
 
     componentDidMount() {
@@ -16,7 +16,7 @@ class Employee extends Component {
             from: employee,
             gas: 1000000
         }).then((result) => {
-            console.log(reuslt);
+            console.log(result);
             this.setState({
                 salary: web3.fromWei(result[1].toNumber()),
                 lastPaidDate: new Date(result[2].toNumber() * 1000)

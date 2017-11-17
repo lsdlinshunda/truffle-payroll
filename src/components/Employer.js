@@ -52,9 +52,9 @@ class Employer extends Component {
                 <h2>Employer</h2>
                 <form className="pure-form pure-form-stacked">
                     <fieldset>
-                        <legend>Add fund</legend>
+                        <legend>增加资金</legend>
 
-                        <label>fund</label>
+                        <label>资金</label>
                         <input 
                             type="text"
                             placeholder="fund"
@@ -64,38 +64,38 @@ class Employer extends Component {
                     </fieldset>
                 </form>
 
-                <form claaName="pure-form pure-form-stacked">
+                <form className="pure-form pure-form-stacked">
                     <fieldset>
-                        <legend>Add/Update Employee</legend>
+                        <legend>增加/更新员工</legend>
 
-                        <label>employee id</label>
+                        <label>员工地址</label>
                         <input 
                             type="text"
                             placeholder="employee"
                             ref={(input) => {this.employeeInput = input;}}/>
 
-                        <label>salary</label>
+                        <label>工资</label>
                         <input 
                             type="text"
                             placeholder="salary"
                             ref={(input) => {this.salaryInput = input;}}/>
 
-                        <button type="button" className="pure-button" onClick={this.addEmployee}>Add</button>
-                        <button type="button" classNmae="pure-button" onClick={this.updateEmployee}>Update</button>
+                        <button type="button" className="pure-button" onClick={this.addEmployee}>增加</button>
+                        <button type="button" className="pure-button" onClick={this.updateEmployee}>更新</button>
                     </fieldset>
                 </form>
 
                 <form className="pure-form pure-form-stacked">
                     <fieldset>
-                        <legend>Remove Employee</legend>
+                        <legend>删除员工</legend>
 
-                        <label>employee id</label>
+                        <label>员工地址</label>
                         <input
                             type="text"
                             placeholder="employee"
                             ref={(input) => {this.removeEmployeeInput = input;}}/>
                         
-                        <button type="button" className="pure-button" onClick={this.removeEmployee}>Remove</button>
+                        <button type="button" className="pure-button" onClick={this.removeEmployee}>删除</button>
                     </fieldset>
                 </form>
             </div>
