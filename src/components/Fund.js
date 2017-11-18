@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, InputNumber, Button} from 'antd';
+import { Form, InputNumber, Button, message} from 'antd';
 
 import Common from './Common';
 
@@ -22,7 +22,7 @@ class Fund extends Component {
             location.reload();
         }).catch(function(err) {
             console.log(err.message);
-            alert("资金增加失败");
+            message.error("增加资金失败");
         });
     }
 
