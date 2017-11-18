@@ -74,7 +74,7 @@ class EmployeeList extends Component {
                 gas: 1000000
             }));
         }
-
+        console.log(requests);
         Promise.all(requests).then(values => {
             const employees = values.map(value => ({
                 key: value[0],
@@ -82,7 +82,6 @@ class EmployeeList extends Component {
                 salary: web3.fromWei(value[1].toNumber()),
                 lastPaidDay: new Date(value[2].toNumber() * 1000).toString()
             }));
-            console.log(employees[0]);
             this.setState({
                 employees: employees,
                 loading: false
@@ -107,11 +106,13 @@ class EmployeeList extends Component {
             }
 
             this.setState({
-                address: '',
-                salary: '',
+                // address: '',
+                // salary: '',
                 showModal: false,
                 employees: employees.concat([newEmployee])
             });
+        }).catch(err => {
+            message.error("添加失败");
         });
     }
 
