@@ -59,8 +59,7 @@ class App extends Component {
     // Get accounts.
     this.state.web3.eth.getAccounts((error, accounts) => {
       this.setState({
-        accounts,
-        selectedAccount: accounts[0]
+        account: accounts[0]
       });
       Payroll.deployed().then((instance) => {
         PayrollInstance = instance
@@ -111,8 +110,8 @@ class App extends Component {
           </Menu>
         </Header>
         <Content style={{ padding: '0 50px'}}>
-          <Layout style={{ padding: '24px 0', background: '#fff', minHeight: '800px'}}>
-            {/* {this.renderContent()} */}
+          <Layout style={{ padding: '24px 0', background: '#fff', minHeight: 780}}>
+            {this.renderContent()}
           </Layout>
         </Content>
         <Footer style={{ textAlign: 'center' }}>

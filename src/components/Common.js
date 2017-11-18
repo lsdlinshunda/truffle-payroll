@@ -30,7 +30,7 @@ class Common extends Component {
         return (
             <div>
                 <h2>通用信息</h2>
-]               <Row gutter={16}>
+                <Row gutter={16}>
                     <Col span={8}>
                         <Card title="合约金额">{balance} Ether</Card>
                     </Col>

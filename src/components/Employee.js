@@ -75,7 +75,7 @@ class Employee extends Component {
     }
 
     render() {
-        const { acocunt, payroll, web3 } = this.props;
+        const { account, payroll, web3 } = this.props;
 
         return (
             <Layout style={{ padding: '0 24px', background: '#fff' }}>

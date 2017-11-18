@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, InputNumber, Button } from 'antd';
+import { Form, InputNumber, Button} from 'antd';
 
 import Common from './Common';
 
@@ -13,10 +13,16 @@ class Fund extends Component {
     }
 
     handleSubmit = (ev) => {
+        ev.preventDefault();
         const { payroll, account, web3 } = this.props;
         payroll.addFund({
             from: account,
             value: web3.toWei(this.state.fund)
+        }).then(function() {
+            location.reload();
+        }).catch(function(err) {
+            console.log(err.message);
+            alert("资金增加失败");
         });
     }
 
