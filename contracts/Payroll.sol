@@ -17,6 +17,7 @@ contract Payroll is Ownable {
     uint constant payDuration = 10 seconds;
     uint totalSalary;
     uint totalEmployee;
+    address[] employeeList;
 
     mapping(address => Employee) public employees;
     
@@ -47,11 +48,13 @@ contract Payroll is Ownable {
         employee.id.transfer(payment);
     }    
     
+    //[BUG] 不刷新页面时能连续添加同一address
     function addEmployee(address employeeId, uint salary) onlyOwner employeeNoExist(employeeId) {
         salary = salary.mul(1 ether);
         employees[employeeId] = Employee(employeeId,salary,now);
         totalSalary = totalSalary.add(salary);
         totalEmployee = totalEmployee.add(1);
+        employeeList.push(employeeId);
     }
     
     function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId) {
@@ -59,6 +62,14 @@ contract Payroll is Ownable {
         totalSalary = totalSalary.sub(employees[employeeId].salary);
         delete employees[employeeId];
         totalEmployee = totalEmployee.sub(1);
+        for (uint i=0;i<totalEmployee;++i) {
+            if (employeeList[i] == employeeId) {
+                employeeList[i] = employeeList[totalEmployee];
+                break;
+            }
+        }
+        delete employeeList[totalEmployee];
+        employeeList.length = employeeList.length.sub(1);
     }
     
     function updateEmployee(address employeeId, uint salary) onlyOwner employeeExist(employeeId) {
@@ -85,7 +96,14 @@ contract Payroll is Ownable {
         return totalSalary;
     }
     
-    function checkEmployee(address employeeId) returns(uint salary, uint lastPayday) {
+    function checkEmployee(uint index) returns (address employeeId, uint salary, uint lastPayday) {
+        employeeId = employeeList[index];
+        var employee = employees[employeeId];
+        salary = employee.salary;
+        lastPayday = employee.lastPayday;
+    }
+    
+    function checkEmployeeByAddress(address employeeId) returns(uint salary, uint lastPayday) {
         var employee = employees[employeeId];
         salary = employee.salary;
         lastPayday = employee.lastPayday;
@@ -110,4 +128,5 @@ contract Payroll is Ownable {
         runway = totalSalary > 0 ? calculateRunway() : 0;
         employeeCount = totalEmployee;
     }
+    
 }
