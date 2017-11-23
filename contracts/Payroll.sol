@@ -21,6 +21,22 @@ contract Payroll is Ownable {
 
     mapping(address => Employee) public employees;
     
+    event NewEmployee(
+        address employee
+    );
+    event UpdateEmployee(
+        address employee
+    );
+    event RemoveEmployee(
+        address employee
+    );
+    event NewFund(
+        uint balance
+    );
+    event GetPaid(
+        address employee
+    );
+
     modifier employeeExist(address employeeId) {
         var employee = employees[employeeId];
         assert(employee.id != 0x0);
@@ -55,6 +71,7 @@ contract Payroll is Ownable {
         totalSalary = totalSalary.add(salary);
         totalEmployee = totalEmployee.add(1);
         employeeList.push(employeeId);
+        NewEmployee(employeeId);
     }
     
     function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId) {
@@ -70,6 +87,7 @@ contract Payroll is Ownable {
         }
         delete employeeList[totalEmployee];
         employeeList.length = employeeList.length.sub(1);
+        RemoveEmployee(employeeId);
     }
     
     function updateEmployee(address employeeId, uint salary) onlyOwner employeeExist(employeeId) {
@@ -78,9 +96,11 @@ contract Payroll is Ownable {
         totalSalary = totalSalary.sub(employees[employeeId].salary).add(salary);
         employees[employeeId].salary = salary;
         employees[employeeId].lastPayday = now;
+        UpdateEmployee(employeeId);
     }
     
     function addFund() payable returns (uint){
+        NewFund(this.balance);
         return this.balance;
     }
     
@@ -121,6 +141,7 @@ contract Payroll is Ownable {
         assert(nextPayDay < now);
         employees[msg.sender].lastPayday = nextPayDay;
         employee.id.transfer(employee.salary);
+        GetPaid(employee.id);
     }
 
     function checkInfo() returns(uint balance, uint runway, uint employeeCount) {
