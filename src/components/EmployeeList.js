@@ -51,7 +51,6 @@ class EmployeeList extends Component {
         const { payroll, account, web3 } = this.props;
         payroll.checkInfo.call({
             from: account,
-            gas: 1000000
         }).then((result) => {
             const employeeCount = result[2].toNumber();
 
@@ -71,7 +70,6 @@ class EmployeeList extends Component {
         for (let index = 0; index < employeeCount; index++) {
             requests.push(payroll.checkEmployee.call(index, {
                 from: account,
-                gas: 1000000
             }));
         }
         console.log(requests);
