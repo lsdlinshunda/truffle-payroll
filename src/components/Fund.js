@@ -19,7 +19,7 @@ class Fund extends Component {
             from: account,
             value: web3.toWei(this.state.fund)
         }).then(function() {
-            location.reload();
+        //    location.reload();
         }).catch(function(err) {
             console.log(err.message);
             message.error("增加资金失败");

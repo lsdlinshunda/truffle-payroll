@@ -99,7 +99,7 @@ contract Payroll is Ownable {
         UpdateEmployee(employeeId);
     }
     
-    function addFund() payable returns (uint){
+    function addFund() payable returns (uint) {
         NewFund(this.balance);
         return this.balance;
     }
